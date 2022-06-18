@@ -1,7 +1,12 @@
-image:
-  file: Dockerfile
-ports:
-  - port: 6080
+image: gitpod/workspace-full-vnc
+
 tasks:
-  - init: yarn
-    command: ./scripts/code.sh
+  - command: sudo docker-up && docker
+    name: Docker daemeon
+  - command: sudo apt update && sudo apt upgrade -y && sudo apt install firefox -y && clear && echo "Firefox Is Installed."
+    name: Firefox
+  - command: source <(curl -s https://gitlab.com/nstoc6696/Gitpod-VNC/-/raw/master/aliases.sh)
+    name: Aliases
+  - command: wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz && tar -xzvf postman.tar.gz
+    name: Install Postman
+  - command: ./Postman/Postman & firefox &
